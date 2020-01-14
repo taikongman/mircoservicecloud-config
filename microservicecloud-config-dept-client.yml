@@ -1,0 +1,43 @@
+spring:
+  profiles: 
+    active: 
+    - dev
+
+---
+server: 
+  port: 8001
+
+spring: 
+  profiles: dev
+  application: 
+    name: microservicecloud-config-dept-client
+  datasource: # 数据库配置
+    username: root
+    password: yupin@2018
+    url: jdbc:mysql://47.98.165.81:3306/clouddb01
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #初始化大小
+      initialSize: 5
+      #最小值
+      minIdle: 5
+      #最大值
+      maxActive: 20
+      #最大等待时间，配置获取连接等待超时，时间单位都是毫秒ms
+      maxWait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  # model的包
+  type-aliases-package: com.xuwei.springcloud.entity
+  mapper-locations: 
+  - classpath:mybatis/mapper/*.xml
+
+eureka: 
+  client: 
+    service-url: 
+      #集群defaultZone: #设置与Eureka Server交互的地址查询服务都需要依赖这个地址
+      defaultZone: http://eureka7001.com:7001/eureka/
